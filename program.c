@@ -34,11 +34,7 @@ int latin(int* [], int);
 // Main function
 void main()
 {
-	int a[ROW][COL];
-	getValue(a, ROW);
-	printMatRow(a, ROW);
-	printf("%d", matDiaSum(a, ROW));
-	scanf_s("%d", &a);
+	// Put a function to check woth the params
 }
 
 
