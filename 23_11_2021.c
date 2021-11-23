@@ -21,17 +21,19 @@
 void productTostring(struct Product*);
 void update(struct Product *, float);
 void printProdArr(struct Product[]);
-
+struct Product* findProd(struct Product[], int);
 
 // Struct of player
-struct Player {
+struct Player 
+{
     int code;
     const char* name;
     const char* team;
 };
 
 // Struct of product
-struct Product {
+struct Product 
+{
     int code;
     const char* name;
     float price;
@@ -60,7 +62,8 @@ int main()
 
 // Function implementatios
 // To string function for Product struct
-void productTostring(struct Product* p) {
+void productTostring(struct Product* p) 
+{
     printf("%sProduct: %d, Name: %s, Price: %f%s\n",
         GREEN,
         p -> code,
@@ -71,15 +74,28 @@ void productTostring(struct Product* p) {
 }
 
 // Update price of product
-void update(struct Product* p, float nValue) {
+void update(struct Product* p, float nValue) 
+{
     p -> price = nValue;
     printf("%sProduct: %s, Price: %f%s", BLUE, p -> name, p -> price, RESET);
 }
 
 // Print array of products
-void printProdArr(struct Product arr[]) {
+void printProdArr(struct Product arr[]) 
+{
     int i;
-    for(i = 0; i < SIZE; i++) {
+    for(i = 0; i < SIZE; i++) 
+    {
         productTostring(arr + i);
+    }
+}
+
+// Return the product found in prods' index key
+struct Product* findProd(struct Product prods[], int key)
+{
+    struct Product* p;
+    for (p = prods; p->code != key; ++p) 
+    {
+        return p;
     }
 }
