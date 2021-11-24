@@ -17,11 +17,20 @@
 #define GREEN   "\033[32m"
 #define BLUE    "\033[34m"
 
+
+// Struct of student
+typedef struct Student {
+    char name[6];
+    int age;
+} *ptr;
+
 // Function titles
 void productTostring(struct Product*);
 void update(struct Product *, float);
 void printProdArr(struct Product[]);
 struct Product* findProd(struct Product[], int);
+ptr input_class(int);
+void print_class(ptr, int);
 
 // Struct of player
 struct Player 
@@ -54,10 +63,9 @@ int main()
     printProdArr(arr);
     // productTostring(&p2);
     update(&p2, 15.4);
-
+    
     // Alert user that program running finished successfully
     printf("\n\n\n%sFINISHED%s\n\n\n", GREEN, RESET);
-    
 }
 
 // Function implementatios
@@ -97,5 +105,59 @@ struct Product* findProd(struct Product prods[], int key)
     for (p = prods; p->code != key; ++p) 
     {
         return p;
+    }
+}
+
+// Get inputs of class students
+ptr input_class(int num) {
+    ptr p, q;
+    int i;
+    p = (ptr) calloc(num, sizeof(ptr));
+    assert(p != NULL);
+    for (i = 0, q=p; i < num; i++, q++) {
+        printf("Enter name and age: \n");
+        scanf_s("%s", &(q -> name));
+        scanf_s("%d", &(q->age));
+    }
+
+    return p;
+}
+
+// Print class of students
+void print_class(ptr c, int n) {
+    int i;
+
+    for (i = 0; i < n; i++, c++) {
+        printf("Student: %s, age: %d", c -> name, c -> age);
+    }
+}
+
+// Return average of class student ages
+double age_avg(ptr c, int n) {
+    double avg = 0;
+
+    for (int i = 0; i < n; i++, c++) {
+        avg += c->age;
+    }
+
+    return avg / n;
+}
+
+void swap(ptr a, ptr b)
+{
+    ptr temp;
+    strcpy(temp->name, a->name);
+    strcpy(a->name, b->name);
+    strcpy(b->name, temp->name);
+
+    temp->age = a->age;
+    a->age = b->age;
+    b->age = temp->age;
+}
+
+void sortarr(ptr a[], int size) {
+    int i;
+    for (i = 0; i < size - 1; i++) {
+        swap(&a[i], min(&a[i + 1], size - i - 1));
     }
 }
